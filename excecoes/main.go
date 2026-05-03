@@ -6,6 +6,11 @@ import (
 	"math"
 )
 
+// NegativeSqrtError implementa a interface de exceção da linguagem Go
+//
+//	type error interface {
+//	    Error() string
+//	}
 type NegativeSqrtError float64
 
 func (f NegativeSqrtError) Error() string {
@@ -20,7 +25,7 @@ func Sqrt(f float64) (float64, error) {
 }
 
 func main() {
-	if result, err := Sqrt(-90); err != nil {
+	if _, err := Sqrt(-90); err != nil {
 		var negError NegativeSqrtError
 		if errors.As(err, &negError) {
 			fmt.Println(err)
@@ -29,6 +34,4 @@ func main() {
 		}
 		return
 	}
-
-	fmt.Println(result)
 }
